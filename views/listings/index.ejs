@@ -7,9 +7,13 @@
 </head>
 <body>
     <h1>All listings</h1>
+    <form method="GET" action="listings/new">
+      <button>Create new Listing</button>
+  </form>
+    
       <ul>
     <% allListings.forEach(listing => { %>
-      <li><a href="<%= listing._id %>"><%= listing.title %> - $<%= listing.price %>  </li>
+      <li><a href="listings/<%= listing._id %>"><%= listing.title %> - $<%= listing.price %>  </li>
     <% }) %>
   </ul>
 </body>
