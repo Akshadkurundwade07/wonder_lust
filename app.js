@@ -37,16 +37,20 @@ app.get('/', (req, res) => {
   res.send('Hello World');
 }); 
 
+
+//Index route
 app.get ("/listings", async (req,res) => {
   const allListings = await Listing.find({});
   res.render("listings/index",{ allListings })
   });
 
-app.get("/listings/new",(req,res) =>{
-  res.render("listings/new");
-});
 
+//New route
+app.get("/listings/new", (req,res) => {
+  res.render("listings/new.ejs")
+})
 
+//Show Route
 app.get("/listings/:id",async (req,res) => {
   let { id } = req.params;
   const listing = await Listing.findById(id);
@@ -54,8 +58,8 @@ app.get("/listings/:id",async (req,res) => {
   //added some extra changes
 });
 
-//create route
 
+//create route
 app.post("/listings", async(req,res) =>{
   //let{ title,description ,image , price, country, location} = req.body;
   const newlisting = new Listing(req.body.listing);
@@ -65,17 +69,30 @@ app.post("/listings", async(req,res) =>{
 
 })
 
+//edit Route
 app.get("/listings/:id/edit", async (req,res) =>{
   let { id } = req.params;
   const listing = await Listing.findById(id);
   res.render("listings/edit.ejs", { listing })
 })
 
+//Update route
 app.put("/listings/:id",async (req,res) => {
   let { id } = req.params;
   await Listing.findByIdAndUpdate(id, {...req.body.listing});
-  redirect("/listings");
+  res.redirect(`/listings/${id}`);
 })
+
+
+//delete route
+
+app.delete("/listings/:id",async (req,res)=>{
+  let {id} = req.params;
+  let deletedlisting = await Listing.findByIdAndDelete(id)
+  console.log(deletedlisting)
+  res.redirect("/listings")
+})
+
 
 // app.get('/testlisting', async (req, res) => {
 //   let samplelisting = new Listing({
