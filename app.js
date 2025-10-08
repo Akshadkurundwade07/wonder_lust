@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const Listing = require('./models/listing'); // Adjust the path as necessary
 const path = require("path");   
 const methodOverride = require("method-override");
-
+const ejsMate = require("ejs-mate")
 
 main()
   .then(() => {
@@ -19,7 +19,6 @@ main()
 
   async function main(){
   mongoose.connect("mongodb://localhost:27017/wanderlust", {
-    
   });
 }
 
@@ -27,12 +26,12 @@ app.set("view engine","ejs");
 app.set("views", path.join(__dirname,"views"));
 app.use(express.urlencoded({extended : true})); 
 app.use(methodOverride("_method"));
+app.engine("ejs",ejsMate)
+app.use(express.static(path.join(__dirname,"/public")))
 
 
 
-
-
-app.get('/', (req, res) => {
+app.get('/abc', (req, res) => {
   console.log('Hello World');
   res.send('Hello World');
 }); 
@@ -41,7 +40,9 @@ app.get('/', (req, res) => {
 //Index route
 app.get ("/listings", async (req,res) => {
   const allListings = await Listing.find({});
-  res.render("listings/index",{ allListings })
+  res.render("listings/index",{ allListings });
+
+
   });
 
 
@@ -66,7 +67,6 @@ app.post("/listings", async(req,res) =>{
   await newlisting.save();
   res.redirect("/listings")
   console.log(listing);
-
 })
 
 //edit Route
