@@ -1,21 +1,74 @@
 <% layout("/layouts/boilerplate") %>
-<body>
-    <h3>Create New listings</h3>
-    <form method="POST" action="/listings">
-        <input name="listing[title]" placeholder="Enter Title" type="text">
-        <br><br>
-        <textarea name="listing[description]" placeholder="Enter Description" type="text"></textarea>
-        <br><br>
-        <input name="listing[image]" placeholder="Enter Image URL" type="text">
-        <br><br>
-        <input name="listing[price]" placeholder="Enter price" type="number">
-        <br><br>
-        <input name="listing[location]" placeholder="Enter location" type="text">
-        <br><br>
-            <input name="listing[country]" placeholder="Enter country name" type="text">
-        <br><br>
-        <Button>Add</Button>
-    </form> 
-    
-</body>
-</html>
+
+<div class="row">
+  <div class="col-8 offset-2">
+    <br>
+    <h3>Create New Listing</h3>
+
+    <form method="POST" action="/listings" class="needs-validation" novalidate>
+
+      <!-- Title -->
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" name="listing[title]" class="form-control" placeholder="Enter Title" required>
+        <div class="invalid-feedback">Title is required.</div>
+      </div>
+
+      <!-- Description -->
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea name="listing[description]" class="form-control" placeholder="Enter Description" rows="4" required></textarea>
+        <div class="invalid-feedback">Description is required.</div>
+      </div>
+
+      <!-- Image URL -->
+      <div class="mb-3">
+        <label for="image" class="form-label">Image URL</label>
+        <input type="text" name="listing[image]" class="form-control" placeholder="Enter Image URL">
+      </div>
+
+      <!-- Location -->
+      <div class="mb-3">
+        <label for="location" class="form-label">Location</label>
+        <input type="text" name="listing[location]" class="form-control" placeholder="Enter Location" required>
+        <div class="invalid-feedback">Location is required.</div>
+      </div>
+
+      <div class="row">
+        <!-- Price -->
+        <div class="mb-3 col-md-4">
+          <label for="price" class="form-label">Price</label>
+          <input type="number" name="listing[price]" class="form-control" placeholder="Enter Price" required>
+          <div class="invalid-feedback">Price is required.</div>
+        </div>
+
+        <!-- Country -->
+        <div class="mb-3 col-md-8">
+          <label for="country" class="form-label">Country</label>
+          <input type="text" name="listing[country]" class="form-control" placeholder="Enter Country" required>
+          <div class="invalid-feedback">Country is required.</div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-dark mt-3">Add Listing</button>
+    </form>
+  </div>
+</div>
+
+<script>
+(() => {
+  'use strict';
+
+  const forms = document.querySelectorAll('.needs-validation');
+
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      form.classList.add('was-validated');
+    });
+  });
+})();
+</script>
