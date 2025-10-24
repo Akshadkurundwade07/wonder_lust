@@ -11,7 +11,7 @@
       <div class="mb-3">
         <label for="title" class="form-label">Title</label>
         <input type="text" name="listing[title]" class="form-control" placeholder="Enter Title" required>
-        <div class="invalid-feedback">Title is required.</div>
+        <div class="valid-feedback">Title looks good.</div>
       </div>
 
       <!-- Description -->
@@ -19,6 +19,7 @@
         <label for="description" class="form-label">Description</label>
         <textarea name="listing[description]" class="form-control" placeholder="Enter Description" rows="4" required></textarea>
         <div class="invalid-feedback">Description is required.</div>
+        <div class="valid-feedback">description looks good</div>
       </div>
 
       <!-- Image URL -->
@@ -39,16 +40,16 @@
         <div class="mb-3 col-md-4">
           <label for="price" class="form-label">Price</label>
           <input type="number" name="listing[price]" class="form-control" placeholder="Enter Price" required>
-          <div class="invalid-feedback">Price is required.</div>
+          <div class="invalid-feedback">Please enter a valid price.</div>
         </div>
 
         <!-- Country -->
         <div class="mb-3 col-md-8">
           <label for="country" class="form-label">Country</label>
           <input type="text" name="listing[country]" class="form-control" placeholder="Enter Country" required>
-          <div class="invalid-feedback">Country is required.</div>
+          <div class="invalid-feedback">Please enter the country Name.</div>
         </div>
-      </div>
+      </div> 
 
       <button type="submit" class="btn btn-dark mt-3">Add Listing</button>
     </form>
