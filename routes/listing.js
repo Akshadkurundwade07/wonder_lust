@@ -65,6 +65,4 @@ router.delete("/:id",wrapasync(async (req,res)=>{
   res.redirect("/listings")
 }));
 
-
-
 module.exports = router;
