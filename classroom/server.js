@@ -3,7 +3,9 @@ const app = express();
 const users  = require("./routes/user.js");
 const posts = require("./routes/post.js");
 const session = require("express-session"); 
+const flash = require("connect-flash");
 
+app.use(flash());
 
 const sessionOptions = {secret : "mysupersecretstring",
     resave: false,
@@ -13,8 +15,9 @@ app.use(session(sessionOptions));
 
 app.get("/register",(req,res)=>{    
     let {name = "anonymous"} = req.query;
-    console.log(req.session);
-    res.send(name);
+    req.session.name = name;
+    req.flash("success","user registered successfully");
+    req.redirect("/hello");
 });
 
 app.get("/hello",(req,res)=>{
