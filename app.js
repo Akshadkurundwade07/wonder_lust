@@ -90,6 +90,11 @@ app.use((req,res,next) => {
     next();
 });
 
+app.get("/", (req, res) => {
+    res.redirect("/listings");
+});
+
+
 // app.get("/demouser", async (req,res) => {
 //     let fakeUser = new User({
 //       email: "student@gmail.com",
@@ -113,4 +118,5 @@ app.all("*", (req, res, next) => {
 app.use((err,req,res,next)=> { 
   let{statusCode=500, message="something went wrong"} = err; 
   res.status(statusCode).render("error.ejs", {err});
+
 })
