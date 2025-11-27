@@ -90,9 +90,6 @@ app.use((req,res,next) => {
     next();
 });
 
-app.get("/", (req, res) => {
-    res.redirect("/listings");
-});
 
 
 // app.get("/demouser", async (req,res) => {
@@ -120,3 +117,4 @@ app.use((err,req,res,next)=> {
   res.status(statusCode).render("error.ejs", {err});
 
 })
+
